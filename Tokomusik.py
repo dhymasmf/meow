@@ -27,56 +27,71 @@ def number(prompt):
         else:
             print('Inputan harus angka')
 
-def update(data):
-    daftar(data)  
-    idx = number("\nMasukkan nomor barang yang ingin diubah: ") - 1  
-    if 0 <= idx < len(data):  
-        print("\n1. Ubah Nama Barang")
-        print("2. Ubah Harga")
-        print("3. Ubah Jenis Barang")
-        pilihan = number("\nMasukkan nomor pilihan: ")
-        if pilihan == 1:
-            data[idx]["Nama Barang"] = input("\nMasukkan Nama Barang Baru: ").title()
-        elif pilihan == 2:
-            data[idx]["Harga"] = number("\nMasukkan Harga Baru: ")
-        elif pilihan == 3:
-            data[idx]["Jenis"] = huruf("\nMasukkan Jenis Barang Baru: ").title()
-        else:
-            print("\nPilihan tidak valid!")
-        print("\nData berhasil diperbarui!")
-        daftar(data)
-    else:
-        print("\nNomor barang tidak ditemukan!")
-
 def create(data):
-    nomor = len(data) + 1
-    nama = input('\nMasukkan Nama Barang: ').title()
-    harga = number('\nMasukkan Harga: ')
-    jenis = huruf('\nMasukkan Jenis Barang: ').title()
+    while True:
+        nomor = len(data) + 1
+        nama = input('\nMasukkan Nama Barang: ').title()
+        harga = number('\nMasukkan Harga: ')
+        jenis = huruf('\nMasukkan Jenis Barang: ').title()
+        data.append({"No": nomor, "Nama Barang": nama, "Harga": harga, "Jenis": jenis})
+        print("\nBarang berhasil ditambahkan!")
+        daftar(data)
+        lanjut = input("\nApakah ingin menambah data lagi? (y/n): ").lower()
+        if lanjut != 'y':
+            return
 
-    data.append({"No": nomor, "Nama Barang": nama, "Harga": harga, "Jenis": jenis})
-    
-    print("\nBarang berhasil ditambahkan!")
-    daftar(data)
+def update(data):
+    while True:
+        daftar(data)  
+        idx = number("\nMasukkan nomor barang yang ingin diubah: ") - 1  
+        if 0 <= idx < len(data):  
+            while True:
+                print("\n1. Ubah Nama Barang")
+                print("2. Ubah Harga")
+                print("3. Ubah Jenis Barang")
+                pilihan = number("\nMasukkan nomor pilihan: ")
+                if pilihan == 1:
+                    data[idx]["Nama Barang"] = input("\nMasukkan Nama Barang Baru: ").title()
+                elif pilihan == 2:
+                    data[idx]["Harga"] = number("\nMasukkan Harga Baru: ")
+                elif pilihan == 3:
+                    data[idx]["Jenis"] = huruf("\nMasukkan Jenis Barang Baru: ").title()
+                else:
+                    print("\nPilihan tidak valid!")
+                    continue
+                print("\nData berhasil diperbarui!")
+                daftar(data)
+                lanjut = input("\nApakah ingin mengubah data lagi? (y/n): ").lower()
+                if lanjut != 'y':
+                    return
+        else:
+            print("\nNomor barang tidak ditemukan!")
 
 def hapus(data):
-    daftar(data)
-    idx = number("\nMasukkan nomor barang yang ingin dihapus: ") - 1  
-    if 0 <= idx < len(data):  
-        konfirmasi = input(f"\nApakah Anda yakin ingin menghapus '{data[idx]['Nama Barang']}'? (y/n): ").lower()
-        if konfirmasi == 'y':
-            del data[idx]
-            for i, barang in enumerate(data):
-                barang["No"] = i + 1  
-            print("\nBarang berhasil dihapus!")
-            daftar(data)
+    while True:
+        daftar(data)
+        idx = number("\nMasukkan nomor barang yang ingin dihapus: ") - 1  
+        if 0 <= idx < len(data):  
+            konfirmasi = input(f"\nApakah Anda yakin ingin menghapus '{data[idx]['Nama Barang']}'? (y/n): ").lower()
+            if konfirmasi == 'y':
+                del data[idx]
+                for i, barang in enumerate(data):
+                    barang["No"] = i + 1  
+                print("\nBarang berhasil dihapus!")
+                daftar(data)
+                
+            else:
+                print("\nPenghapusan dibatalkan.")
         else:
-            print("\nPenghapusan dibatalkan.")
-    else:
-        print("\nNomor barang tidak ditemukan!")
+            print("\nNomor barang tidak ditemukan!")
+
+        lanjut = input("\nApakah ingin menghapus data lagi? (y/n): ").lower()
+        if lanjut != 'y':
+            return
 
 def main():
     while True:
+        print('\n======= MENU =======')
         print('\n1. Tambahkan Barang')
         print('2. Ubah Barang')
         print('3. Hapus Barang')
@@ -93,7 +108,9 @@ def main():
         elif pilihan == 4:
             daftar(data)
         elif pilihan == 5:
-            print('Terima Kasih')
+            print('\n======== Terima Kasih ========')
             break
-
+print("                                 ==Welcome==")
+print("                              ==Daftar Barang==")
+daftar(data)
 main()
