@@ -79,7 +79,6 @@ def hapus(data):
                     barang["No"] = i + 1  
                 print("\nBarang berhasil dihapus!")
                 daftar(data)
-                
             else:
                 print("\nPenghapusan dibatalkan.")
         else:
@@ -98,7 +97,6 @@ def main():
         print('4. Daftar Barang')
         print('5. Keluar App')
         pilihan = number('\nMasukkan Nomor: ')
-        
         if pilihan == 1:
             create(data)
         elif pilihan == 2:
@@ -110,7 +108,8 @@ def main():
         elif pilihan == 5:
             print('\n======== Terima Kasih ========')
             break
+
 print("                                 ==Welcome==")
 print("                              ==Daftar Barang==")
 daftar(data)
-main()
+print(main())
