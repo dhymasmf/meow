@@ -379,12 +379,12 @@ def to_cart(data, cart):
         if not yesno("\nApakah ingin menambah barang ke keranjang lagi? (Yes/No): "):
             return
 
-def remove_cart(cart):
+def remove_cart(cart, data):
     print("\n===== Hapus Barang =====")
     if not cart:
         print("\nKeranjang masih kosong!")
         return
-    while True:
+    while cart:
         print(tabulate(cart, headers="keys", tablefmt="fancy_grid"))
         kode = number("\nMasukkan kode barang yang ingin dihapus dari keranjang (Masukkan 0 untuk batal): ")
         if kode == 0:
@@ -405,7 +405,8 @@ def remove_cart(cart):
                         print(f"Stok '{barang['Nama Barang']}' dikembalikan. Stok sekarang: {barang['Stok']}")
                         break
                 if not cart:
-                    print("\nKeranjang sekarang kosong.")
+                    print("\nKeranjang sekarang kosong. Kembali ke menu utama customer.")
+                    main_customer()
                     return
             else:
                 print("\nPenghapusan barang dibatalkan.")
