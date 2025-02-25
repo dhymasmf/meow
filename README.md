@@ -51,5 +51,5 @@ python MeowCloth.py
 - **Dikembangkan oleh**: Dimas Maulidin Firdaus
 
 ## Lisensi
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
 
